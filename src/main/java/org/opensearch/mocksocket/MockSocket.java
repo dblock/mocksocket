@@ -17,11 +17,11 @@
  * under the License.
  */
 
-package org.elasticsearch.mocksocket;
+package org.opensearch.mocksocket;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.ServerSocket;
+import java.net.Proxy;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.security.AccessController;
@@ -29,38 +29,53 @@ import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 
-public class MockServerSocket extends ServerSocket {
+public class MockSocket extends Socket {
 
-    public MockServerSocket() throws IOException {
-        super();
+    public MockSocket() {
     }
 
-    public MockServerSocket(int port) throws IOException {
-        super(port);
+    public MockSocket(Proxy proxy) {
+        super(proxy);
     }
 
-    public MockServerSocket(int port, int backlog) throws IOException {
-        super(port, backlog);
+    public MockSocket(String host, int port) throws IOException {
+        super(host, port);
     }
 
-    public MockServerSocket(int port, int backlog, InetAddress bindAddr) throws IOException {
-        super(port, backlog, bindAddr);
+    public MockSocket(InetAddress address, int port) throws IOException {
+        super(address, port);
+    }
+
+    public MockSocket(String host, int port, InetAddress localAddr, int localPort) throws IOException {
+        super(host, port, localAddr, localPort);
+    }
+
+    public MockSocket(InetAddress address, int port, InetAddress localAddr, int localPort) throws IOException {
+        super(address, port, localAddr, localPort);
     }
 
     @Override
-    public Socket accept() throws IOException {
+    public void connect(SocketAddress endpoint) throws IOException {
+        connect(endpoint, 0);
+    }
+
+    @Override
+    public void connect(SocketAddress endpoint, int timeout) throws IOException {
         try {
-            return AccessController.doPrivileged((PrivilegedExceptionAction<Socket>) MockServerSocket.super::accept);
+            AccessController.doPrivileged((PrivilegedExceptionAction<Void>) () -> {
+                MockSocket.super.connect(endpoint, timeout);
+                return null;
+            });
         } catch (PrivilegedActionException e) {
             throw (IOException) e.getCause();
         }
     }
 
     @Override
-    public void bind(SocketAddress endpoint) throws IOException {
+    public void bind(SocketAddress bindpoint) throws IOException {
         try {
             AccessController.doPrivileged((PrivilegedExceptionAction<Void>) () -> {
-                MockServerSocket.super.bind(endpoint);
+                MockSocket.super.bind(bindpoint);
                 return null;
             });
         } catch (PrivilegedActionException e) {

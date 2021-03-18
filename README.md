@@ -14,7 +14,7 @@ Instead of:
 You can do:
 
     <dependency>
-      <groupId>org.elasticsearch</groupId>
+      <groupId>org.renameme</groupId>
       <artifactId>mocksocket</artifactId>
       <version>1.0</version>
       <scope>test</scope>

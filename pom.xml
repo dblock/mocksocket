@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.elasticsearch</groupId>
+    <groupId>org.opensearch</groupId>
     <artifactId>mocksocket</artifactId>
     <packaging>jar</packaging>
     <version>1.3-SNAPSHOT</version>
-    <name>Elasticsearch MockSocket</name>
+    <name>OpenSearch MockSocket</name>
     <description>Allows using sockets without having to grant dangerous permissions to all of your code.</description>
     <inceptionYear>2016</inceptionYear>
-    <url>https://github.com/elastic/mocksocket</url>
+    <url>https://github.com/opensearch-project/mocksocket</url>
     <developers>
         <developer>
             <name>Elastic</name>
@@ -25,9 +25,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git@github.com:elastic/mocksocket.git</connection>
-        <developerConnection>scm:git:git@github.com:elastic/mocksocket.git</developerConnection>
-        <url>https://github.com/elastic/mocksocket</url>
+        <connection>scm:git:git@github.com:opensearch-project/mocksocket.git</connection>
+        <developerConnection>scm:git:git@github.com:opensearch-project/mocksocket.git</developerConnection>
+        <url>https://github.com/opensearch-project/mocksocket</url>
     </scm>
 
     <properties>
